@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1f1d2e; /* Rose Pine Moon background */
+            color: #d9e0ee; /* Light text color */
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .time-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: inline-block;
+            text-align: center;
+        }
+        .container a {
+            display: block;
+            color: #c0caf5; /* Rose Pine light text */
+            font-size: 12px;
+            margin: 10px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .container a:hover {
+            color: #ea9a97; /* Rose Pine yellow on hover */
+        }
+        .time {
+            font-size: 18px;
+            /* font-weight: bold; */
+        }
+        .date {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-container">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+    </div>
+    <div class="container">
+        <a href="https://www.youtube.com" target="_blank">YouTube</a>
+        <a href="https://www.reddit.com" target="_blank">Reddit</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://mail.google.com" target="_blank">Gmail</a>
+        <a href="https://drive.proton.me" target="_blank">Proton Drive</a>
+        <a href="https://mail.proton.me" target="_blank">Proton Mail</a>
+    </div>
+
+    <script>
+        function updateTimeAndDate() {
+            const now = new Date();
+            
+            // Get the time in 12-hour format
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const period = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert to 12-hour format
+
+            // Format the date
+            const day = now.getDate();
+            const month = now.toLocaleString('default', { month: 'long' });
+            const year = now.getFullYear();
+
+            // Set the time and date on the page
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds} ${period}`;
+            document.getElementById('date').textContent = `${day} ${month} ${year}`;
+        }
+
+        setInterval(updateTimeAndDate, 1000); // Update every second
+        updateTimeAndDate(); // Initial call to set time immediately
+    </script>
+</body>
+</html>
